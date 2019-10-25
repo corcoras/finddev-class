@@ -1,0 +1,38 @@
+data = '''<div class="tt-dataset tt-dataset-1"><strong>Devices</strong>
+<a class="tt-suggestion tt-selectable" onclick="return ga('send', 'event', 'Quick Search', 'found device')" href="/devices/display/10237">
+<div title="" data-original-title="Device ID: 7wd<br>Store: MERCEDES BENZ OF WHITE PLAINS<br>Enterprise: Pepe (North)<br>Software: Cisco/IOS-XE<br
+>CMF: 25286001" data-toggle="tooltip" data-placement="right" data-html="true">r2-25286001 (192.110.28.252)</div></a><a class="tt-suggestion tt-selectable" onclick="return ga('send', 'event', 'Quick Search', 'found device')" href="/devices/display/10270"><div title="" data-original-title="Device ID: 7xa<br>Store: MERCEDES BENZ OF WHITE PLAINS<br>Enterprise: Pepe (North)<br>Software: Cisco/IOS-XE<br>CMF: 25286001" data-toggle="tooltip" data-placement="right" data-html="true">r3-25286001 (192.110.28.247)</div></a><a class="tt-suggestion tt-selectable" onclick="return ga('send', 'event', 'Quick Search', 'found device')" href="/devices/display/10285"><div title="" data-original-title="Device ID: 7xp<br>Store: MERCEDES BENZ OF WHITE PLAINS<br>Enterprise: Pepe (North)<br>Software: Cisco/IOS<br>CMF: 25286001" data-toggle="tooltip" data-placement="right" data-html="true">vgw1-25286001 (206.89.171.62)</div></a><a class="tt-suggestion tt-selectable" onclick="return ga('send', 'event', 'Quick Search', 'found device')" href="/devices/display/10312"><div title="" data-original-title="Device ID: 7yg<br>Store: MERCEDES BENZ OF WHITE PLAINS<br>Enterprise: Pepe (North)<br>Software: Cisco/IOS<br>CMF: 25286001" data-toggle="tooltip" data-placement="right" data-html="true">old-r1-25286001 (192.224.33.252)</div></a><a class="tt-suggestion tt-selectable" onclick="return ga('send', 'event', 'Quick Search', 'found device')" href="/devices/display/10314"><div title="" data-original-title="Device ID: 7yi<br>Store: MERCEDES BENZ OF WHITE PLAINS<br>Enterprise: Pepe (North)<br>Software: Cisco/IOS<br>CMF: 25286001" data-toggle="tooltip" data-placement="right" data-html="true">s1-25286001 (192.110.28.254)</div></a><a class="tt-suggestion tt-selectable" onclick="return ga('send', 'event', 'Quick Search', 'found device')" href="/devices/display/10315"><div title="" data-original-title="Device ID: 7yj<br>Store: MERCEDES BENZ OF WHITE PLAINS<br>Enterprise: Pepe (North)<br>Software: Cisco/IOS-XE<br>CMF: 25286001" data-toggle="tooltip" data-placement="right" data-html="true">r1-25286001 (192.110.28.253)</div></a><a class="tt-suggestion tt-selectable" onclick="return ga('send', 'event', 'Quick Search', 'found device')" href="/devices/display/10339"><div title="" data-original-title="Device ID: 7z7<br>Store: MERCEDES BENZ OF WHITE PLAINS<br>Enterprise: Pepe (North)<br>Software: Cisco/IOS<br>CMF: 25286001" data-toggle="tooltip" data-placement="right" data-html="true">s2-25286001 (192.110.28.248)</div></a><a class="tt-suggestion tt-selectable" onclick="return ga('send', 'event', 'Quick Search', 'found device')" href="/devices/display/38144"><div title="" data-original-title="Device ID: tfk<br>Store: MERCEDES BENZ OF WHITE PLAINS<br>Enterprise: Pepe (North)<br>Software: Cisco/ASA<br>CMF: 25286001" data-toggle="tooltip" data-placement="right" data-html="true">asa25286001 (192.224.33.246)</div></a><a class="tt-suggestion tt-selectable" onclick="return ga('send', 'event', 'Quick Search', 'found device')" href="/devices/display/40453"><div title="" data-original-title="Device ID: v7p<br>Software: FortiOS<br>CMF: 25286001" data-toggle="tooltip" data-placement="right" data-html="true">FGT90D3Z13014894 (192.224.33.211)</div></a><a class="tt-suggestion tt-selectable" onclick="return ga('send', 'event', 'Quick Search', 'found device')" href="/devices/display/41031"><div title="" data-original-title="Device ID: vnr<br>Store: MERCEDES BENZ OF WHITE PLAINS<br>Enterprise: Pepe (North)<br>Software: Cisco/IOS<br>CMF: 25286001" data-toggle="tooltip" data-placement="right" data-html="true">s3-25286001 (192.110.28.199)</div></a><em>Showing 1-10 of 11 devices.</em></div>'''
+
+
+class finddev:
+    def __init__(self, data):
+        self.data = data
+    def find(self):
+        devices = []
+        x = self.data.split('\"true\">')
+        count = 0
+        last =len(x)-1
+        while count < len(x):
+            count = count + 1
+            if count > 0 and count <= last:
+                devs = x[count].split('</div>')
+                t = devs[0].replace('(', '')
+                tt = t.replace(')','')
+                print(tt)
+                devices.append(tt)
+
+>>> '''
+... >>> mydev = finddev(data)
+... >>> mydev.find()
+... r2-25286001 192.110.28.252
+... r3-25286001 192.110.28.247
+... vgw1-25286001 206.89.171.62
+... old-r1-25286001 192.224.33.252
+... s1-25286001 192.110.28.254
+... r1-25286001 192.110.28.253
+... s2-25286001 192.110.28.248
+... asa25286001 192.224.33.246
+... FGT90D3Z13014894 192.224.33.211
+... s3-25286001 192.110.28.199
+... >>> 
+... '''
